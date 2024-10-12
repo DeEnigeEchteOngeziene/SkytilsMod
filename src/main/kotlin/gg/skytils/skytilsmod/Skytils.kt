@@ -367,6 +367,7 @@ class Skytils {
             RelicWaypoints,
             ScamCheck,
             ScoreCalculation,
+            DungeonScoreMessageList,
             SelectAllColorSolver,
             ShootTheTargetSolver,
             SimonSaysSolver,

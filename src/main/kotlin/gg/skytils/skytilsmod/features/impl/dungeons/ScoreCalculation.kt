@@ -27,6 +27,7 @@ import gg.skytils.skytilsmod.core.tickTimer
 import gg.skytils.skytilsmod.events.impl.MainReceivePacketEvent
 import gg.skytils.skytilsmod.events.impl.skyblock.DungeonEvent
 import gg.skytils.skytilsmod.features.impl.dungeons.DungeonFeatures.dungeonFloorNumber
+import gg.skytils.skytilsmod.features.impl.handlers.DungeonScoreMessageList
 import gg.skytils.skytilsmod.features.impl.handlers.MayorInfo
 import gg.skytils.skytilsmod.listeners.DungeonListener
 import gg.skytils.skytilsmod.mixins.transformers.accessors.AccessorChatComponentText
@@ -45,6 +46,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.roundToInt
+import kotlin.random.Random
 
 object ScoreCalculation {
 
@@ -231,7 +233,12 @@ object ScoreCalculation {
                         "§c§l" + Skytils.config.messageTitle270Score.ifBlank { "270" },
                         20
                     )
-                    if (Skytils.config.sendMessageOn270Score) Skytils.sendMessageQueue.add("/pc Skytils-SC > ${Skytils.config.message270Score.ifBlank { "270 score" }}")
+                    //if (Skytils.config.sendMessageOn270Score) Skytils.sendMessageQueue.add("/pc Skytils-SC > ${Skytils.config.message270Score.ifBlank { "270 score" }}")
+                    if (Skytils.config.sendMessageOn270Score)
+                    {
+                        var randomMessage = getRandomMessageFromList(DungeonScoreMessageList.score270Messages)
+                        Skytils.sendMessageQueue.add("/pc Skytils-SC > (270) ${randomMessage.ifBlank { "270 score" }}")
+                    }
                 }
                 if (!hasSaid300 && score >= 300) {
                     hasSaid300 = true
@@ -239,7 +246,12 @@ object ScoreCalculation {
                         "§c§l" + Skytils.config.messageTitle300Score.ifBlank { "300" },
                         20
                     )
-                    if (Skytils.config.sendMessageOn300Score) Skytils.sendMessageQueue.add("/pc Skytils-SC > ${Skytils.config.message300Score.ifBlank { "300 score" }}")
+                    //if (Skytils.config.sendMessageOn300Score) Skytils.sendMessageQueue.add("/pc Skytils-SC > ${Skytils.config.message300Score.ifBlank { "300 score" }}")
+                    if (Skytils.config.sendMessageOn300Score)
+                    {
+                        var randomMessage = getRandomMessageFromList(DungeonScoreMessageList.score300Messages)
+                        Skytils.sendMessageQueue.add("/pc Skytils-SC > (300) ${randomMessage.ifBlank { "300 score" }}")
+                    }
                 }
             }
         }
@@ -256,6 +268,10 @@ object ScoreCalculation {
                 else -> "§6§lS+"
             }
         }
+
+    fun getRandomMessageFromList(messages : ArrayList<String>): String {
+        return messages[Random.nextInt(messages.size)]
+    }
 
     fun updateText(score: Int) {
         Utils.checkThreadAndQueue {

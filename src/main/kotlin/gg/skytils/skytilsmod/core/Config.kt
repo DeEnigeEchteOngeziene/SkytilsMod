@@ -33,6 +33,7 @@ import gg.skytils.skytilsmod.commands.impl.RepartyCommand
 import gg.skytils.skytilsmod.features.impl.dungeons.catlas.core.CatlasConfig
 import gg.skytils.skytilsmod.features.impl.trackers.Tracker
 import gg.skytils.skytilsmod.gui.features.PotionNotificationsGui
+import gg.skytils.skytilsmod.gui.features.ScoreMessageListGui
 import gg.skytils.skytilsmod.gui.features.SpiritLeapNamesGui
 import gg.skytils.skytilsmod.mixins.transformers.accessors.AccessorCommandHandler
 import gg.skytils.skytilsmod.utils.ModChecker
@@ -520,6 +521,20 @@ object Config : Vigilant(
     var sendMessageOn270Score = false
 
     @Property(
+        type = PropertyType.BUTTON, name = "Message list for 270 score",
+        description = "List of messages where one message is chosen at random when hitting 270 score.",
+        category = "Dungeons", subcategory = "Score Calculation",
+        placeholder = "Open GUI",
+        i18nName = "skytils.config.dungeons.score_calculation.message_list_for_270_score",
+        i18nCategory = "skytils.config.dungeons",
+        i18nSubcategory = "skytils.config.dungeons.score_calculation"
+    )
+    @Suppress("unused")
+    fun on270ScoreMessageListButton() {
+        Skytils.displayScreen = ScoreMessageListGui(270)
+    }
+
+    @Property(
         type = PropertyType.PARAGRAPH, name = "Message for 270 score",
         description = "Customize the message sent on hitting 270 score.",
         category = "Dungeons", subcategory = "Score Calculation",
@@ -560,6 +575,20 @@ object Config : Vigilant(
         i18nSubcategory = "skytils.config.dungeons.score_calculation"
     )
     var sendMessageOn300Score = false
+
+    @Property(
+        type = PropertyType.BUTTON, name = "Message list for 300 score",
+        description = "List of messages where one message is chosen at random when hitting 300 score.",
+        category = "Dungeons", subcategory = "Score Calculation",
+        placeholder = "Open GUI",
+        i18nName = "skytils.config.dungeons.score_calculation.message_list_for_300_score",
+        i18nCategory = "skytils.config.dungeons",
+        i18nSubcategory = "skytils.config.dungeons.score_calculation"
+    )
+    @Suppress("unused")
+    fun on300ScoreMessageListButton() {
+        Skytils.displayScreen = ScoreMessageListGui(300)
+    }
 
     @Property(
         type = PropertyType.PARAGRAPH, name = "Message for 300 score",
