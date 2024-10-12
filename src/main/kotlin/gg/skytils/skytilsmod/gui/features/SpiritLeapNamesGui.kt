@@ -143,7 +143,7 @@ class SpiritLeapNamesGui : WindowScreen(ElementaVersion.V2, newGuiScale = 2), Re
             y = CenterConstraint()
             height = 75.percent()
         }.onLeftClick {
-            container.parent.removeChild(container)
+            scrollComponent.removeChild(container)
         }
 
         val enabledButton = SimpleButton(if (enabled) "Enabled" else "Disabled").childOf(container).constrain {
